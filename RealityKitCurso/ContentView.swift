@@ -7,15 +7,16 @@
 
 import SwiftUI
 import RealityKit
+import ARKit
 
 struct ContentView : View
 {
     
     @State private var isPlacementEnabled:Bool = false
-    @State private var selectedModel:String?
-    @State private var modelConfirmedForPlacement:String?
+    @State private var selectedModel:Model?
+    @State private var modelConfirmedForPlacement:Model?
     
-    private var models:[String] = {
+    private var models:[Model] = {
         
        // Pegar o nome dos modelos de forma dinamica
         
@@ -24,12 +25,14 @@ struct ContentView : View
             return []
         }
         
-        var availableModels: [String] = []
+        var availableModels: [Model] = []
         
         for file in files where file.hasSuffix("usdz") {
             let modelName = file.replacingOccurrences(of: ".usdz", with: "")
             
-            availableModels.append(modelName)
+            let model = Model(modelName: modelName)
+            
+            availableModels.append(model)
         }
         
         return availableModels
@@ -55,12 +58,21 @@ struct ContentView : View
 
 struct ARViewContainer: UIViewRepresentable {
     
-    @Binding var modelConfirmedForPlacement: String?
+    @Binding var modelConfirmedForPlacement: Model?
     
     func makeUIView(context: Context) -> ARView {
         
         let arView = ARView(frame: .zero)
 
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = [.horizontal, .vertical]
+        config.environmentTexturing = .automatic
+        
+        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
+            config.sceneReconstruction = .mesh
+        }
+        
+        arView.session.run(config)
         
 
         return arView
@@ -70,9 +82,22 @@ struct ARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) 
     {
         
-        if let modelName = modelConfirmedForPlacement
+        if let model = modelConfirmedForPlacement
         {
-            print(modelName)
+            if let modelEntity = model.modelEntity
+            {
+                print(model.modelName)
+                
+                let anchorEntity = AnchorEntity(plane: .any, minimumBounds: SIMD2<Float>(0.2, 0.2))
+                
+                anchorEntity.addChild(modelEntity.clone(recursive: true))
+                
+                uiView.scene.addAnchor(anchorEntity)
+            } else
+            {
+                print("Incapaz de carregar a modelEntity de \(model.modelName)")
+            }
+            
             
             DispatchQueue.main.async 
             {
@@ -87,9 +112,9 @@ struct ARViewContainer: UIViewRepresentable {
 struct ModelPickerView: View {
     
     @Binding var isPlacementEnabled:Bool
-    @Binding var selectedModel:String?
+    @Binding var selectedModel:Model?
     
-    var models:[String]
+    var models:[Model]
     let size:CGFloat = 80
     
     var body: some View {
@@ -105,7 +130,7 @@ struct ModelPickerView: View {
                     isPlacementEnabled = true
                 } label: {
                     
-                    Image(models[index])
+                    Image(uiImage: models[index].image)
                         .resizable()
                         .frame(minWidth: size, maxWidth: size, minHeight: size, maxHeight: size)
                         .aspectRatio(1/1, contentMode: .fit)
@@ -121,8 +146,8 @@ struct ModelPickerView: View {
 struct PlacementButtonsView: View {
     
     @Binding var isPlacementEnabled:Bool
-    @Binding var selectedModel:String?
-    @Binding var modelConfirmedForPlacement:String?
+    @Binding var selectedModel:Model?
+    @Binding var modelConfirmedForPlacement:Model?
     
     var body: some View {
         HStack
