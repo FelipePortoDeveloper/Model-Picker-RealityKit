@@ -14,6 +14,9 @@
 		0AC363122C3508D1002D16DE /* RealityKitCursoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC363112C3508D1002D16DE /* RealityKitCursoTests.swift */; };
 		0AC3631C2C3508D1002D16DE /* RealityKitCursoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3631B2C3508D1002D16DE /* RealityKitCursoUITests.swift */; };
 		0AC3631E2C3508D1002D16DE /* RealityKitCursoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3631D2C3508D1002D16DE /* RealityKitCursoUITestsLaunchTests.swift */; };
+		0AC3632E2C350B2A002D16DE /* tv_retro.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0AC3632B2C350B2A002D16DE /* tv_retro.usdz */; };
+		0AC3632F2C350B2A002D16DE /* fender_stratocaster.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0AC3632C2C350B2A002D16DE /* fender_stratocaster.usdz */; };
+		0AC363302C350B2A002D16DE /* gramophone.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0AC3632D2C350B2A002D16DE /* gramophone.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		0AC363172C3508D1002D16DE /* RealityKitCursoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealityKitCursoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC3631B2C3508D1002D16DE /* RealityKitCursoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityKitCursoUITests.swift; sourceTree = "<group>"; };
 		0AC3631D2C3508D1002D16DE /* RealityKitCursoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityKitCursoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0AC3632B2C350B2A002D16DE /* tv_retro.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = tv_retro.usdz; path = ../../../tv_retro.usdz; sourceTree = "<group>"; };
+		0AC3632C2C350B2A002D16DE /* fender_stratocaster.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = fender_stratocaster.usdz; path = ../../../fender_stratocaster.usdz; sourceTree = "<group>"; };
+		0AC3632D2C350B2A002D16DE /* gramophone.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = gramophone.usdz; path = ../../../gramophone.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,7 @@
 		0AC362FF2C3508CE002D16DE /* RealityKitCurso */ = {
 			isa = PBXGroup;
 			children = (
+				0AC3632A2C350AEA002D16DE /* Modelos */,
 				0AC363002C3508CE002D16DE /* AppDelegate.swift */,
 				0AC363022C3508CE002D16DE /* ContentView.swift */,
 				0AC363042C3508D1002D16DE /* Assets.xcassets */,
@@ -125,6 +132,16 @@
 				0AC3631D2C3508D1002D16DE /* RealityKitCursoUITestsLaunchTests.swift */,
 			);
 			path = RealityKitCursoUITests;
+			sourceTree = "<group>";
+		};
+		0AC3632A2C350AEA002D16DE /* Modelos */ = {
+			isa = PBXGroup;
+			children = (
+				0AC3632C2C350B2A002D16DE /* fender_stratocaster.usdz */,
+				0AC3632D2C350B2A002D16DE /* gramophone.usdz */,
+				0AC3632B2C350B2A002D16DE /* tv_retro.usdz */,
+			);
+			path = Modelos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,8 +248,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AC3632E2C350B2A002D16DE /* tv_retro.usdz in Resources */,
 				0AC363082C3508D1002D16DE /* Preview Assets.xcassets in Resources */,
+				0AC3632F2C350B2A002D16DE /* fender_stratocaster.usdz in Resources */,
 				0AC363052C3508D1002D16DE /* Assets.xcassets in Resources */,
+				0AC363302C350B2A002D16DE /* gramophone.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
