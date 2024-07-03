@@ -27,9 +27,6 @@ class Model
             .sink(receiveCompletion: {
                 loadCompletion in
                 
-                // Onde lida com erros
-                
-                print("Incapaz de carregar modelEntity com o modelName \(modelName)")
                 
             }, receiveValue: {
                 modelEntity in
@@ -37,7 +34,9 @@ class Model
                 // Onde recebe o modelEntity
                 
                 self.modelEntity = modelEntity
-                print("Carregou com sucesso a modelEntity com o modelName: \(modelName)")
+                if self.modelEntity != nil {
+                    print("Carregou com sucesso a modelEntity com o modelName: \(modelName)")
+                }
             })
         
     }

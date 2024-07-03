@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 import ARKit
+import FocusEntity
 
 struct ContentView : View
 {
@@ -56,6 +57,7 @@ struct ContentView : View
     }
 }
 
+
 struct ARViewContainer: UIViewRepresentable {
     
     @Binding var modelConfirmedForPlacement: Model?
@@ -74,6 +76,7 @@ struct ARViewContainer: UIViewRepresentable {
         
         arView.session.run(config)
         
+        _ = FocusEntity(on: arView, focus: .classic)
 
         return arView
         
@@ -82,15 +85,17 @@ struct ARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) 
     {
         
+        
+        
         if let model = modelConfirmedForPlacement
         {
             if let modelEntity = model.modelEntity
             {
                 print(model.modelName)
                 
-                let anchorEntity = AnchorEntity(plane: .any, minimumBounds: SIMD2<Float>(0.2, 0.2))
+                let anchorEntity = AnchorEntity(plane: .any)
                 
-                anchorEntity.addChild(modelEntity.clone(recursive: true))
+                anchorEntity.addChild(modelEntity)
                 
                 uiView.scene.addAnchor(anchorEntity)
             } else
