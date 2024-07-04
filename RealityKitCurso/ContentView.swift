@@ -95,7 +95,7 @@ struct ARViewContainer: UIViewRepresentable {
                 
                 let anchorEntity = AnchorEntity(plane: .any)
                 
-                anchorEntity.addChild(modelEntity)
+                anchorEntity.addChild(modelEntity.clone(recursive: true))
                 
                 uiView.scene.addAnchor(anchorEntity)
             } else
